@@ -70,5 +70,7 @@ export interface HyperAgentConfig<T extends BrowserProviders = "Local"> {
     "debug"
   >;
   localConfig?: ConstructorParameters<typeof LocalBrowserProvider>[0];
-  cdpConfig?: ConstructorParameters<typeof CDPBrowserProvider>[0];
+  cdpConfig?: T extends "CDP" 
+    ? ConstructorParameters<typeof CDPBrowserProvider>[0] & { wsEndpoint: string }
+    : ConstructorParameters<typeof CDPBrowserProvider>[0];
 }

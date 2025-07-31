@@ -89,7 +89,8 @@ export class HyperAgent<T extends BrowserProviders = "Local"> {
           })
         : this.browserProviderType === "CDP"
         ? new CDPBrowserProvider({
-            ...(params.cdpConfig ?? { wsEndpoint: "" }),
+            wsEndpoint: params.cdpConfig?.wsEndpoint ?? "",
+            options: params.cdpConfig?.options,
             debug: params.debug,
           })
         : new LocalBrowserProvider(params.localConfig)
